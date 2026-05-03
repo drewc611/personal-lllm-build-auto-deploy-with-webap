@@ -1,0 +1,7 @@
+flask
+flask-bootstrap
+flask-wtf
+flask-login
+mlx-lm
+click
+requests

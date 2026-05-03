@@ -1,0 +1,13 @@
+From test@example.com Fri Jan  1 00:00:00 2026
+From: Test User <test@example.com>
+To: Drew <drew@example.com>
+Subject: Example email for LLM ingestion
+Date: Fri, 1 Jan 2026 00:00:00 +0000
+
+Hello Drew,
+
+This is a sample email saved in MBOX format for the personal LLM repository.
+
+Best,
+Test User
+

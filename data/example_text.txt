@@ -1,0 +1,5 @@
+This example text file is used for nanoGPT training.
+It is intentionally short so that the first run completes quickly.
+
+Local LLMs are useful for privacy, experimentation, and personal AI workflows.
+The goal is to keep your data and models under your control.

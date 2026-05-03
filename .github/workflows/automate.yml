@@ -1,0 +1,40 @@
+name: Automate LLM Setup
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate Python scripts
+        run: |
+          python3 -m py_compile app.py llm-setup.py auto-update.py mbox_to_txt.py fine_tune_lora.py train.py prepare_nanogpt.py
+
+      - name: Clone nanoGPT for CI validation
+        run: |
+          python3 prepare_nanogpt.py
+
+      - name: Run sample data conversion
+        run: |
+          python3 mbox_to_txt.py data/example_email.mbox data/email_samples || true
+
+      - name: Print sample files
+        run: |
+          ls -la data || true

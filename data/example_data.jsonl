@@ -1,0 +1,2 @@
+{"prompt": "Write a short summary of the benefits of using a local LLM.", "completion": "Running a local LLM gives you privacy, faster iteration, and direct control over the model and its data. It can be customized for your own workflows and kept offline when needed."}
+{"prompt": "Explain why LoRA is a useful fine-tuning technique.", "completion": "LoRA trains only a small adapter instead of the entire model, which makes fine-tuning much cheaper in memory and compute. It allows you to personalize style without modifying the full base model."}

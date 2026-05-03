@@ -1,0 +1,9 @@
+{
+  "user": "drew",
+  "email": "drew@example.com",
+  "workspace": "/workspaces/personal-lllm-build-auto-deploy-with-webap",
+  "model": "llama3.1:8b-instruct-q4_K_M",
+  "ollama_url": "http://ollama:11434",
+  "loRA_path": "./llama3.1-lora",
+  "nanoGPT_path": "./nanoGPT"
+}
