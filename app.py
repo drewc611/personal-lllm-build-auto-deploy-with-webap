@@ -5,7 +5,10 @@ import requests
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'change-this-secret-key'
+# Fail closed: there is no default. Generate a value with
+#   python3 -c "import secrets; print(secrets.token_hex(32))"
+# and export it as FLASK_SECRET_KEY (or put it in a gitignored .env).
+app.config['SECRET_KEY'] = os.environ['FLASK_SECRET_KEY']
 
 
 def load_config():
@@ -84,4 +87,9 @@ def health():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    # The Werkzeug debugger runs arbitrary Python from the browser, so debug is
+    # off unless FLASK_DEBUG=1 is set explicitly for a local session. Binding
+    # to every interface is likewise an explicit choice (FLASK_HOST=0.0.0.0),
+    # which the Dockerfile makes for the container.
+    app.run(host=os.environ.get('FLASK_HOST', '127.0.0.1'), port=8000,
+            debug=os.environ.get('FLASK_DEBUG') == '1')

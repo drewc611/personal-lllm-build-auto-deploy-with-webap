@@ -28,11 +28,18 @@ A deployable LLM toolkit for local Ollama, LoRA fine-tuning, nanoGPT learning, F
 pip install -r requirements.txt
 ```
 
-4. Start the Flask web app locally:
+4. Create the secret the app refuses to start without, then start the Flask web app locally:
 
 ```bash
+cp .env.example .env
+python3 -c "import secrets; print(secrets.token_hex(32))"   # paste into FLASK_SECRET_KEY in .env
+export $(grep -v '^#' .env | xargs)
 python3 app.py
 ```
+
+The app binds to `127.0.0.1` and runs with the debugger off unless you set
+`FLASK_HOST=0.0.0.0` or `FLASK_DEBUG=1` yourself. `.env` is gitignored; commit
+`.env.example` only.
 
 5. Open: `http://localhost:8000`
 
