@@ -7,6 +7,7 @@ services:
       - FLASK_ENV=development
       # Required, no default: cp .env.example .env and set a generated value.
       - FLASK_SECRET_KEY=${FLASK_SECRET_KEY:?set FLASK_SECRET_KEY in .env (see .env.example)}
+      - RUN_API_TOKEN=${RUN_API_TOKEN:?set RUN_API_TOKEN in .env (see .env.example)}
       # The container must listen on all interfaces for the port mapping to work.
       - FLASK_HOST=0.0.0.0
       - OLLAMA_URL=http://ollama:11434

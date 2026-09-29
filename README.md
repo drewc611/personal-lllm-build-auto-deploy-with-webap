@@ -33,6 +33,7 @@ pip install -r requirements.txt
 ```bash
 cp .env.example .env
 python3 -c "import secrets; print(secrets.token_hex(32))"   # paste into FLASK_SECRET_KEY in .env
+python3 -c "import secrets; print(secrets.token_hex(32))"   # run again, paste into RUN_API_TOKEN in .env
 export $(grep -v '^#' .env | xargs)
 python3 app.py
 ```
@@ -40,6 +41,10 @@ python3 app.py
 The app binds to `127.0.0.1` and runs with the debugger off unless you set
 `FLASK_HOST=0.0.0.0` or `FLASK_DEBUG=1` yourself. `.env` is gitignored; commit
 `.env.example` only.
+
+`POST /run` (the "Start LoRA" / "Start nanoGPT" buttons) needs
+`Authorization: Bearer $RUN_API_TOKEN`; the web page has a field for it. Only
+one job runs at a time and a second request gets `409` until it finishes.
 
 5. Open: `http://localhost:8000`
 
