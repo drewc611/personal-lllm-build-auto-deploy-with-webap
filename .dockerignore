@@ -1,0 +1,8 @@
+# Keep local secrets and repo metadata out of the image.
+.env
+.env.*
+!.env.example
+.git
+__pycache__/
+*.pyc
+nanoGPT/

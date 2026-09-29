@@ -5,27 +5,35 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: '3.10'
 
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
 
       - name: Validate Python scripts
         run: |
           python3 -m py_compile app.py llm-setup.py auto-update.py mbox_to_txt.py fine_tune_lora.py train.py prepare_nanogpt.py
+
+      - name: Run tests
+        run: python3 -m pytest -q
 
       - name: Clone nanoGPT for CI validation
         run: |
@@ -33,8 +41,8 @@ jobs:
 
       - name: Run sample data conversion
         run: |
-          python3 mbox_to_txt.py data/example_email.mbox data/email_samples || true
+          python3 mbox_to_txt.py data/example_email.mbox data/email_samples
 
       - name: Print sample files
         run: |
-          ls -la data || true
+          ls -la data

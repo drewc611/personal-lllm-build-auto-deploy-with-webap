@@ -33,7 +33,8 @@
       <div class="col-lg-4">
         <div class="card p-4 mb-3">
           <h4>Workflow actions</h4>
-          <p>Use these buttons to start local workflows.</p>
+          <p>Use these buttons to start local workflows. Enter the run token (RUN_API_TOKEN) first; it is kept only in this page, not stored.</p>
+          <input id="run-token" type="password" class="form-control mb-2" placeholder="Run token" autocomplete="off" />
           <button class="btn btn-secondary w-100 mb-2" onclick="runWorkflow('lora')">Start LoRA</button>
           <button class="btn btn-success w-100" onclick="runWorkflow('nanogpt')">Start nanoGPT</button>
         </div>
@@ -71,9 +72,10 @@
     }
 
     async function runWorkflow(action) {
+      const token = document.getElementById('run-token').value;
       const response = await fetch('/run', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ action })
       });
       const result = await response.json();
