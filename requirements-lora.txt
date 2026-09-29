@@ -1,0 +1,6 @@
+# Optional: only for fine_tune_lora.py, intended for Apple silicon (the MLX
+# framework). Version resolved on 2026-09-29. On the Linux host used to resolve
+# it, `pip install mlx-lm` finished without installing mlx itself, so the LoRA
+# step cannot run there. mlx-lm's own dependencies are not pinned here because
+# they differ by platform and were not resolvable on that host.
+mlx-lm==0.31.3

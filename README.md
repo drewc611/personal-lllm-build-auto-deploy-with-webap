@@ -22,7 +22,7 @@ A deployable LLM toolkit for local Ollama, LoRA fine-tuning, nanoGPT learning, F
 
 1. Install Python 3.10+ and Docker.
 2. Clone the repo.
-3. Install Python requirements:
+3. Install Python requirements (exact versions; add `requirements-dev.txt` to run the tests with `pytest`):
 
 ```bash
 pip install -r requirements.txt
@@ -71,7 +71,7 @@ python3 train.py --prepare --epochs 5
 ### Install MLX-LM
 
 ```bash
-pip install mlx-lm
+pip install -r requirements-lora.txt
 ```
 
 ### Prepare your data
