@@ -1,0 +1,10 @@
+# Local development only: mounts the checkout over /app so edits apply without a
+# rebuild. Not for deployed hosts, where a compromised app could edit the host
+# checkout. Use with:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+# The container runs as uid 10001, so files the jobs write (nanoGPT/, adapters)
+# need a checkout that uid can write to.
+services:
+  app:
+    volumes:
+      - .:/app
